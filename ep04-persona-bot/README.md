@@ -7,6 +7,9 @@ prompts, few-shot examples, and chain-of-thought prompting — all in one file.
 ## What's in here
 
 - **`persona_bot.py`** — the whole agent. One file, no framework.
+- **`config.py`** — loads API keys and the default provider via `python-dotenv`,
+  reading them as real system environment variables rather than as a private
+  store — so `persona_bot.py` never touches `os.environ` directly.
 - **`requirements.txt`** — `openai`, `anthropic`, `tiktoken`, `python-dotenv`.
 - **`.env.example`** — copy to `.env` and add your API key.
 

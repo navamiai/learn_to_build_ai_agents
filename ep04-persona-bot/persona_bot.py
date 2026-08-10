@@ -13,18 +13,18 @@ Works with either OpenAI or Anthropic's API. Pick one with --provider,
 or set PROVIDER in your .env file. Supports --dry-run so you can test
 the whole loop before spending a single API credit.
 
+API keys are never read here directly — see config.py, which loads them
+via python-dotenv from your system environment variables.
+
 Usage:
     python persona_bot.py --provider anthropic --temperature 0.9 --cot
     python persona_bot.py --provider openai --temperature 0 --dry-run
 """
 
 import argparse
-import os
 import sys
 
-from dotenv import load_dotenv
-
-load_dotenv()
+import config
 
 # ---------------------------------------------------------------------------
 # THE PERSONA — this is the "soul" of the agent (Episode 3: system prompts)
@@ -100,7 +100,7 @@ def count_tokens_openai(text: str, model: str = "gpt-4o-mini") -> int:
 def call_openai(messages, temperature: float, model: str = "gpt-4o-mini") -> str:
     from openai import OpenAI
 
-    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    client = OpenAI(api_key=config.get_api_key("openai"))
     response = client.chat.completions.create(
         model=model,
         messages=messages,
@@ -112,7 +112,7 @@ def call_openai(messages, temperature: float, model: str = "gpt-4o-mini") -> str
 def call_anthropic(system: str, history, temperature: float, model: str = "claude-3-5-sonnet-latest") -> str:
     import anthropic
 
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    client = anthropic.Anthropic(api_key=config.get_api_key("anthropic"))
     response = client.messages.create(
         model=model,
         system=system,
@@ -182,8 +182,9 @@ def run(provider: str, temperature: float, use_cot: bool, dry_run: bool) -> None
             else:
                 raise ValueError(f"Unknown provider: {provider}")
         except KeyError as e:
-            print(f"\n[error] Missing API key: {e}. Set it in your .env file, "
-                  f"or run with --dry-run to test without one.\n")
+            print(f"\n[error] Missing API key: {e}. Set it in your .env file "
+                  f"(or as a system environment variable), or run with --dry-run "
+                  f"to test without one.\n")
             continue
         except Exception as e:
             print(f"\n[error] API call failed: {e}\n")
@@ -197,7 +198,7 @@ def main():
     parser.add_argument(
         "--provider",
         choices=["openai", "anthropic"],
-        default=os.environ.get("PROVIDER", "anthropic"),
+        default=config.PROVIDER,
         help="Which API to call (default: value of PROVIDER in .env, or 'anthropic')",
     )
     parser.add_argument(
@@ -218,11 +219,9 @@ def main():
     )
     args = parser.parse_args()
 
-    if not args.dry_run and args.provider == "openai" and "OPENAI_API_KEY" not in os.environ:
-        print("Missing OPENAI_API_KEY. Add it to your .env file or run with --dry-run.")
-        sys.exit(1)
-    if not args.dry_run and args.provider == "anthropic" and "ANTHROPIC_API_KEY" not in os.environ:
-        print("Missing ANTHROPIC_API_KEY. Add it to your .env file or run with --dry-run.")
+    if not args.dry_run and not config.has_api_key(args.provider):
+        env_var = "OPENAI_API_KEY" if args.provider == "openai" else "ANTHROPIC_API_KEY"
+        print(f"Missing {env_var}. Add it to your .env file or run with --dry-run.")
         sys.exit(1)
 
     run(args.provider, args.temperature, args.cot, args.dry_run)
