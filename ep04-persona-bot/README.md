@@ -20,6 +20,9 @@ pip install -r requirements.txt
 cp .env.example .env
 # edit .env and add OPENAI_API_KEY or ANTHROPIC_API_KEY
 ```
+Note: 
+You may save API key to a system environment variable OR in .env file.
+persona_bot.py never reads your API key directly. That job belongs to a separate config.py, which uses python-dotenv to pull the key in as a real system environment variable — so it works the same whether that key lives in your .env file or is set at the OS level.
 
 ## Run it
 
