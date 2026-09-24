@@ -1,0 +1,34 @@
+{
+  "name": "Devon Marsh",
+  "email": "devon.marsh.eng@example.com",
+  "linkedin": "linkedin.com/in/devonmarsh",
+  "work_experience": [
+    {
+      "company": "Freelance",
+      "title": "Junior Developer",
+      "duration": "Jan 2024 - Present",
+      "bullet_points": [
+        "Built a few small websites using HTML and CSS",
+        "Currently learning JavaScript"
+      ]
+    }
+  ],
+  "skills": {
+    "languages": [],
+    "frameworks": [],
+    "tools": [
+      "HTML",
+      "CSS",
+      "Notepad"
+    ]
+  },
+  "education": [
+    {
+      "institution": "Some Community College",
+      "degree": "Incomplete coursework",
+      "field_of_study": null,
+      "graduation_year": null
+    }
+  ],
+  "candidate_summary": "Devon Marsh is a junior-level developer with freelance experience beginning January 2024. Work has centered on building small websites using HTML and CSS, with JavaScript listed as currently being learned. Listed skills are HTML, CSS, and Notepad, and education consists of incomplete coursework at a community college."
+}

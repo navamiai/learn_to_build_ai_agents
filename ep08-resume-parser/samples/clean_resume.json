@@ -1,0 +1,59 @@
+{
+  "name": "Priya Nair",
+  "email": "priya.nair.dev@gmail.com",
+  "linkedin": "linkedin.com/in/priyanairdev",
+  "work_experience": [
+    {
+      "company": "Northwind Logistics",
+      "title": "Backend Engineer",
+      "duration": "Mar 2022 - Present",
+      "bullet_points": [
+        "Rebuilt the shipment-tracking API in FastAPI, cutting p95 latency from 900ms to 140ms",
+        "Designed a Postgres schema for multi-warehouse inventory used by 40+ internal services",
+        "Mentored two junior engineers through their first on-call rotations"
+      ]
+    },
+    {
+      "company": "BrightPath Retail",
+      "title": "Software Engineer",
+      "duration": "Jul 2019 - Feb 2022",
+      "bullet_points": [
+        "Built a Django-based returns-processing system handling 10k+ requests/day",
+        "Introduced pytest coverage from 20% to 85% across the checkout module",
+        "Migrated legacy cron jobs to Celery with Redis as the broker"
+      ]
+    }
+  ],
+  "skills": {
+    "languages": [
+      "Python",
+      "JavaScript",
+      "SQL"
+    ],
+    "frameworks": [
+      "FastAPI",
+      "Django",
+      "React",
+      "Celery",
+      "pytest"
+    ],
+    "tools": [
+      "Docker",
+      "AWS (EC2, S3, RDS)",
+      "Git",
+      "Jira",
+      "Scrum",
+      "Postgres",
+      "Redis"
+    ]
+  },
+  "education": [
+    {
+      "institution": "VIT Vellore",
+      "degree": "B.Tech",
+      "field_of_study": "Computer Science",
+      "graduation_year": "2019"
+    }
+  ],
+  "candidate_summary": "Priya Nair is a software engineer with backend experience dating from July 2019 to the present across logistics and retail domains. Work has included building and rebuilding APIs and processing systems with FastAPI and Django, designing Postgres schemas, increasing test coverage, and migrating cron jobs to Celery with Redis. Listed skills include Python, JavaScript, SQL, FastAPI, Django, React, Docker, AWS (EC2, S3, RDS), Git, Jira, and Scrum."
+}
